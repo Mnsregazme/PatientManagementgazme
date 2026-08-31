@@ -1,0 +1,330 @@
+{% extends "base.html" %}
+
+{% block title %}
+جزئیات بیمار
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="page-header">
+
+    <h1>
+        جزئیات بیمار
+    </h1>
+
+    <p>
+        اطلاعات کامل بیمار
+    </p>
+
+</div>
+
+
+<!-- =========================
+     اطلاعات هویتی
+========================= -->
+
+<div class="card">
+
+    <h2 style="margin-bottom: 25px;">
+
+        {{ patient["first_name"] }}
+        {{ patient["last_name"] }}
+
+    </h2>
+
+
+    <table>
+
+        <tr>
+
+            <th>
+                کد بیمار
+            </th>
+
+            <td>
+                {{ patient["id"] }}
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <th>
+                نام
+            </th>
+
+            <td>
+                {{ patient["first_name"] }}
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <th>
+                نام خانوادگی
+            </th>
+
+            <td>
+                {{ patient["last_name"] }}
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <th>
+                کد ملی
+            </th>
+
+            <td>
+                {{ patient["national_id"] or "-" }}
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <th>
+                تاریخ تولد
+            </th>
+
+            <td>
+                {{ patient["birth_date"] or "-" }}
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <th>
+                جنسیت
+            </th>
+
+            <td>
+                {{ patient["gender"] or "-" }}
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>
+
+
+<!-- =========================
+     اطلاعات تماس
+========================= -->
+
+<div class="card">
+
+    <h2 style="margin-bottom: 25px;">
+        اطلاعات تماس
+    </h2>
+
+
+    <table>
+
+        <tr>
+
+            <th>
+                شماره تلفن
+            </th>
+
+            <td>
+                {{ patient["phone"] or "-" }}
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <th>
+                شماره تماس اضطراری
+            </th>
+
+            <td>
+                {{ patient["emergency_phone"] or "-" }}
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>
+
+
+<!-- =========================
+     اطلاعات جسمانی
+========================= -->
+
+<div class="card">
+
+    <h2 style="margin-bottom: 25px;">
+        اطلاعات جسمانی
+    </h2>
+
+
+    <table>
+
+        <tr>
+
+            <th>
+                گروه خونی
+            </th>
+
+            <td>
+                {{ patient["blood_type"] or "-" }}
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <th>
+                وزن
+            </th>
+
+            <td>
+                {{ patient["weight"] or "-" }}
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <th>
+                قد
+            </th>
+
+            <td>
+                {{ patient["height"] or "-" }}
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>
+
+
+<!-- =========================
+     اطلاعات پزشکی
+========================= -->
+
+<div class="card">
+
+    <h2 style="margin-bottom: 25px;">
+        اطلاعات پزشکی
+    </h2>
+
+
+    <table>
+
+        <tr>
+
+            <th>
+                سابقه پزشکی
+            </th>
+
+            <td>
+                {{ patient["medical_history"] or "-" }}
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <th>
+                حساسیت‌ها
+            </th>
+
+            <td>
+                {{ patient["allergies"] or "-" }}
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <th>
+                توضیحات
+            </th>
+
+            <td>
+                {{ patient["notes"] or "-" }}
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>
+
+
+<!-- =========================
+     عملیات
+========================= -->
+
+<div class="card">
+
+    <div>
+
+
+        <!-- سوابق پزشکی -->
+
+        <a
+            href="/patient/{{ patient['id'] }}/medical-records"
+            class="primary-button"
+        >
+            سوابق پزشکی
+        </a>
+
+
+        <!-- بازگشت به بیماران -->
+
+        <a
+            href="/patients"
+            class="details-button"
+            style="margin-right: 8px;"
+        >
+            بازگشت به بیماران
+        </a>
+
+
+        <!-- حذف بیمار -->
+         <form
+            method="POST"
+            action="/delete-patient/{{ patient['id'] }}"
+            style="display: inline;"
+            onsubmit="return confirm('آیا از حذف این بیمار مطمئن هستید؟');"
+        >
+
+            <button
+                type="submit"
+                class="delete-button"
+            >
+                حذف بیمار
+            </button>
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+{% endblock %}

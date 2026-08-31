@@ -1,0 +1,279 @@
+{% extends "base.html" %}
+
+{% block title %}
+گزارش‌های سامانه
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <h1>
+        گزارش‌های سامانه
+    </h1>
+
+    <p>
+        آمار و اطلاعات کلی بیماران و سوابق پزشکی
+    </p>
+
+</div>
+
+
+<div
+    style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        margin-bottom: 25px;
+    "
+>
+
+
+    <div class="card">
+
+        <h3 style="margin-bottom: 12px;">
+            تعداد کل بیماران
+        </h3>
+
+        <div
+            style="
+                font-size: 32px;
+                font-weight: bold;
+                color: #050f36;
+            "
+        >
+            {{ patient_count }}
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3 style="margin-bottom: 12px;">
+            تعداد سوابق پزشکی
+        </h3>
+
+        <div
+            style="
+                font-size: 32px;
+                font-weight: bold;
+                color: #050f36;
+            "
+        >
+            {{ record_count }}
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3 style="margin-bottom: 12px;">
+            بیماران دارای سابقه پزشکی
+        </h3>
+
+        <div
+            style="
+                font-size: 32px;
+                font-weight: bold;
+                color: #050f36;
+            "
+        >
+            {{ patients_with_records }}
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3 style="margin-bottom: 12px;">
+            بیماران دارای حساسیت
+        </h3>
+
+        <div
+            style="
+                font-size: 32px;
+                font-weight: bold;
+                color: #050f36;
+            "
+        >
+            {{ patients_with_allergies }}
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <h2 style="margin-bottom: 25px;">
+        آمار جنسیت بیماران
+    </h2>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    جنسیت
+                </th>
+
+                <th>
+                    تعداد
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            <tr>
+
+                <td>
+                    مرد
+                </td>
+
+                <td>
+                    {{ male_count }}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    زن
+                </td>
+
+                <td>
+                    {{ female_count }}
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<div class="card">
+
+    <h2 style="margin-bottom: 25px;">
+        آمار گروه‌های خونی
+    </h2>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    گروه خونی
+                </th>
+
+                <th>
+                    تعداد بیماران
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for blood_type, count in blood_types %}
+
+            <tr>
+
+                <td>
+                    {{ blood_type or "ثبت نشده" }}
+                </td>
+
+                <td>
+                    {{ count }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<div class="card">
+
+    <h2 style="margin-bottom: 25px;">
+        میانگین اطلاعات جسمانی
+    </h2>
+
+    <table>
+
+        <tr>
+
+            <th>
+                میانگین وزن
+            </th>
+
+            <td>
+                {{ average_weight or "-" }}
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <th>
+                میانگین قد
+            </th>
+
+            <td>
+                {{ average_height or "-" }}
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>
+
+
+<div class="card">
+
+    <h2 style="margin-bottom: 15px;">
+        مشخصات پروژه
+    </h2>
+
+    <p style="margin-bottom: 8px;">
+        <strong>
+            منصوره گزمه
+        </strong>
+    </p>
+
+    <p style="margin-bottom: 8px;">
+        دانشجو مهندسی پزشکی دانشگاه خیام
+    </p>
+
+    <p>
+        پروژه کارشناسی
+    </p>
+
+</div>
+
+{% endblock %}
