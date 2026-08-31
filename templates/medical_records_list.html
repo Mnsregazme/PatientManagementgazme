@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}
+سوابق پزشکی
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <h1>
+        سوابق پزشکی
+    </h1>
+
+    <p>
+        فهرست بیماران و سوابق پزشکی ثبت‌شده
+    </p>
+
+</div>
+
+
+<div class="card">
+
+    <h2 style="margin-bottom: 25px;">
+        بیماران
+    </h2>
+
+
+    {% if patients %}
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    کد بیمار
+                </th>
+
+                <th>
+                    نام بیمار
+                </th>
+
+                <th>
+                    کد ملی
+                </th>
+
+                <th>
+                    تعداد سوابق
+                </th>
+
+                <th>
+                    عملیات
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for patient in patients %}
+
+            <tr>
+
+                <td>
+                    {{ patient["id"] }}
+                </td>
+
+                <td>
+                    {{ patient["first_name"] }}
+                    {{ patient["last_name"] }}
+                </td>
+
+                <td>
+                    {{ patient["national_id"] or "-" }}
+                </td>
+
+                <td>
+                    {{ patient["record_count"] }}
+                </td>
+
+                <td>
+
+                    <a
+                        href="/patient/{{ patient['id'] }}/medical-records"
+                        class="details-button"
+                    >
+                        مشاهده سوابق
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+
+    {% else %}
+
+    <div class="empty">
+
+        هنوز بیماری ثبت نشده است.
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
